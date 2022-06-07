@@ -1,0 +1,70 @@
+{% extends 'component/base.html' %}
+{% block title %} Home Page {% endblock title %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+
+            {% for x in acct_details %}
+            <div class="col-md-4">
+                <div class="p-4">
+                    <div class="card text-dark mb-2 bg-light">
+                        <div class="card-body">
+                            <div class="p-3">
+                                <h6>Balance</h6>
+                                <h4>{{ x.acct_type }} <span class="text-danger">{{ x.balance }}</span></h4>
+                                <hr>
+                                <h6>Account Number</h6>
+                                <h4>{{ x.acct_no }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container my-5">
+        <div>
+            <span class="h4">Transaction</span>
+            <span><a href="{% url 'transaction' %}" class="btn btn-primary float-end">New Transaction</a></span>
+        </div>
+        <div class="p-4 bg-light">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td colspan="2">Larry the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<section>
+</section>
+{% endblock %}

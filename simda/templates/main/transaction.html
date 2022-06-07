@@ -1,0 +1,62 @@
+{% extends 'component/base.html' %}
+{% block title %} Transaction Page {% endblock title %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row my-5">
+            <div class="col-md-6">
+                <div class="p-4 bg-light">
+                    <h4>Transfer Rate</h4>
+                    <ul>
+                        <li>USD - NGN --> $1 - N415.32</li>
+                        <li>EUR - USD --> £1 - $1.09</li>
+                        <li>USD - NGN --> $1 - N453.30</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h4>Transfer Money</h4>
+                <div class="p-4 bg-light">
+                    <p>Note: You'll be charge <span class="text-danger">$10.0</span> on every transfer</p>
+                    {% if page == 'trans' %}
+                    <form action="{% url 'details' %}" method="POST">{% csrf_token %}
+                        <p>From Account:</p>
+                        <select name="from" class="form-select" aria-label="Default select example">
+                            <option selected>Select Account</option>
+                            {% for acct in accts %}
+                            <option value="{{ acct.acct_no }}">{{ acct.acct_type }}</option>
+                            {% endfor %}
+                        </select>
+                        <p>To Account:</p>
+                        <select name="to" class="form-select" aria-label="Default select example">
+                            <option selected>Select Account</option>
+                            {% for acct in accts %}
+                            <option value="{{ acct.acct_no }}">{{ acct.acct_type }}</option>
+                            {% endfor %}
+                        </select>
+                        <p>Amount:</p>
+                        <input type="text" name="amount" class="form-control" required>
+                        <input type="submit" value="Next" class="btn btn-primary mt-3">
+                    </form>
+                    {% else %}
+                    <div class="p-4">
+                        <h4>Confirm Payment</h4>
+                        <form action="" method="POST">
+                            <p>You're Sending <span
+                                    class="text-success">{{ to_acct }} {{ actual_amount }}</span> to {{ aza }}</p>
+                            <hr class="my-4">
+
+                            <h6>Amount: {{ from_acct }} <span class="text-danger">{{ amount }}</span></h6>
+                            <h6>Charge: {{ from_acct }} <span class="text-danger">{{ charge_fee }}</span></h6>
+                            <h6>Total: {{ from_acct }} <span class="text-danger">{{ total }}</span></h6>
+                            <input type="submit" value="Send Money" class="btn btn-primary">
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

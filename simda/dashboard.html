@@ -1,0 +1,72 @@
+{% extends 'component/base.html' %}
+
+{% load static %}
+{% block title %} Dashboard Page {% endblock %}
+{% block content %}
+<header>
+    {% include 'component/dashboard_nav.html' %}
+</header>
+<section>
+    <div class="container">
+        <div class="row">
+            {% for x in acct_details %}
+            <div class="col-md-4">
+                <div class="p-4">
+                    <div class="card text-dark mb-2" style="background-color:#20c997;">
+                        <div class="card-body">
+                            <div class="p-3">
+                                <h6>Balance</h6>
+                                <h4>{{ x.acct_type }} <span class="text-danger">{{ x.balance }}</span></h4>
+                                <hr>
+                                <h6>Account Number</h6>
+                                <h4>{{ x.acct_no }}</h4>
+                                <a href="{% url 'deposit' %}" class="btn-sm btn-warning text-decoration-none">Fund Account</a>
+                                <a href="{% url 'withdraw' %}" class="btn-sm btn-primary text-decoration-none float-end">Withdraw</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container py-5">
+        <div class="row">
+            <h3 class="mb-5 text-center">Banking Quick links</h3>
+            <div class="col-md-3 mb-3">
+                <div class="wrapper text-center">
+                    <img class="img-fluid rounded-circle mb-2" src="{% static 'img/loan.png' %}" style="height: 50px;">
+                    <h6>Loans</h6>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="wrapper text-center">
+                    <img class="img-fluid rounded-circle mb-2" src="{% static 'img/airtime.png' %}"
+                         style="height: 50px;">
+                    <h6>Airtime</h6>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <a href="{% url 'transfer' %}" class="text-decoration-none text-dark">
+                    <div class="wrapper text-center">
+                        <img class="img-fluid rounded-circle mb-2" src="{% static 'img/send_money.png' %}"
+                             style="height: 50px;">
+                        <h6>Transfer Money</h6>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 mb-3">
+                <a href="{% url 'transaction' %}" class="text-decoration-none text-dark">
+                    <div class="wrapper text-center">
+                        <img class="img-fluid rounded-circle mb-2" src="{% static 'img/trans_history.png' %}"
+                             style="height: 50px;">
+                        <h6>Transaction history</h6>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
